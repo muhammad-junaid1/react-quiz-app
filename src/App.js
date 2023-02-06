@@ -1,16 +1,20 @@
 import StyledContainer from "./styles/StyledContainer";
-import { useReducer } from "react";
-import StyledQuizCard from "./styles/StyledQuizCard";
+import { useReducer, useEffect } from "react";
+import QuizCard from "./components/QuizCard";
 import StyledQuizHomeScreen from "./styles/StyledQuizHomeScreen";
 
 const ACTIONS = {
   SET_QUIZ_START: "SET_QUIZ_START",
+  SET_QUESTIONS: "SET_QUESTIONS"
 };
 
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case ACTIONS.SET_QUIZ_START:
       return { ...state, startQuiz: payload };
+
+    case ACTIONS.SET_QUESTIONS:
+      return {...state, questions: payload}; 
 
     default:
       return state;
@@ -19,6 +23,9 @@ const reducer = (state, { type, payload }) => {
 
 const initialState = {
   startQuiz: "",
+  currQuestionIdx: 0,
+  questions: [],
+  totalQuestions: 5
 };
 
 function App() {
@@ -38,6 +45,22 @@ function App() {
     });
   };
 
+  useEffect(() => {
+    const getQuestions = async () => {
+      try {
+        const response = await fetch("https://the-trivia-api.com/api/questions?limit=5&categories=science&difficulty=easy");
+        const data = await response.json();
+        dispatch({
+          type: ACTIONS.SET_QUESTIONS,
+          payload: data,
+        });
+      } catch (error) {
+        console.log("error in getting questions ", error);
+      }
+    }
+    getQuestions();
+  }, []);
+
   if (!state.startQuiz) {
     return (
       <StyledContainer>
@@ -56,11 +79,12 @@ function App() {
     );
   } else if (state.startQuiz === "yes") {
     return (
-      <StyledContainer>
-        <StyledQuizCard>
-          <h1>Quiz</h1>
-        </StyledQuizCard>
-      </StyledContainer>
+        <StyledContainer>
+          {state.questions.length ?
+              <QuizCard currQuestionIdx={state.currQuestionIdx} totalQuestions={state.totalQuestions} questionData={state.questions[state.currQuestionIdx]}/>
+              : <></>
+          }
+        </StyledContainer>
     );
   } else {
     return <></>;
