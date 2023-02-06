@@ -1,9 +1,21 @@
 import StyledQuizCard from "../styles/StyledQuizCard";
 import Choice from "./Choice";
 
-const QuizCard = ({currQuestionIdx, totalQuestions, questionData}) => {
+const QuizCard = ({currQuestionIdx, totalQuestions, questionData, dispatch, ACTIONS}) => {
     const randIdx = Math.floor(Math.random() * questionData.incorrectAnswers.length);
     questionData.incorrectAnswers.splice(randIdx, null, questionData.correctAnswer);
+
+    const handleClickChoice = (selectedChoice) => {
+        const correctAnswer = questionData.correctAnswer.toString().toLowerCase();
+        if(correctAnswer === selectedChoice) {
+            dispatch({
+                type: ACTIONS.INCREASE_SCORE,
+            });
+        }
+        dispatch({
+            type: ACTIONS.SET_NEXT_QUESTION,
+        });
+    }
     return (
         <>
             <StyledQuizCard>
@@ -13,7 +25,7 @@ const QuizCard = ({currQuestionIdx, totalQuestions, questionData}) => {
                 </div>
                 <div className="right">
                     {questionData.incorrectAnswers.map((choice, idx) => {
-                        return <Choice key={idx} text={choice}/>;
+                        return <Choice onClick={() => handleClickChoice(choice.toString().toLowerCase())} key={idx} text={choice}/>;
                     })}
                 </div>
             </StyledQuizCard>
