@@ -12,8 +12,11 @@ function App() {
 
         <StyledQuizHomeScreen>
             <h1>Ready For The Quiz?</h1>
-            <button id="no">Nah, Never</button>
-            <button id="yes">Yes I'm in</button>
+            <button id="no">Nah, Never<div>
+              <span>&#8599;</span> 
+              <p>Don't click this</p>
+            </div></button>
+            <button id="yes">Yes I'm in </button>
         </StyledQuizHomeScreen>
       </StyledContainer>
     </>
