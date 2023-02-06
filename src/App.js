@@ -96,7 +96,7 @@ function App() {
       return (
         <>
           <StyledContainer>
-            <Result score={state.score} totalQuestions={state.totalQuestions}/>
+            <Result score={state.score} totalQuestions={state.totalQuestions} />
           </StyledContainer>
         </>
       );
