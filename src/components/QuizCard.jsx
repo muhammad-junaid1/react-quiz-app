@@ -45,10 +45,6 @@ const QuizCard = ({
         type: ACTIONS.SET_QUESTIONS,
         payload: data,
       });
-      dispatch({
-        type: ACTIONS.SET_TOTAL_QUESTIONS,
-        payload: 5
-      });
     }, 2000);
     // getQuestions();
   }, []);

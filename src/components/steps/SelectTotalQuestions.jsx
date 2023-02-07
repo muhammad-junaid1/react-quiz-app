@@ -11,7 +11,7 @@ const SelectTotalQuestions = ({ dispatch, ACTIONS }) => {
 
   const handleClickNext = () => {
     dispatch({
-      type: ACTIONS.SET_LIMIT,
+      type: ACTIONS.SET_TOTAL_QUESTIONS,
       payload: value,
     });
 

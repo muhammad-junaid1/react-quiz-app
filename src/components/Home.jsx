@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import Quiz from "./Quiz";
 import StyledQuizCard from "../styles/StyledQuizCard";
 import StyledQuizHomeScreen from "../styles/StyledQuizHomeScreen";
-import Result from "./Result";
+import Result from "./Results";
 
 const ACTIONS = {
   SET_QUIZ_START: "SET_QUIZ_START",
