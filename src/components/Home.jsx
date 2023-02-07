@@ -12,7 +12,8 @@ const ACTIONS = {
   SET_NEXT_STEP: "SET_NEXT_STEP",
   SET_DIFFICULTY_LEVEL: "SET_DIFFICULTY_LEVEL",
   SET_CATEGORIES: "SET_CATEGORIES",
-  SET_TOTAL_QUESTIONS: "SET_TOTAL_QUESTIONS"
+  SET_TOTAL_QUESTIONS: "SET_TOTAL_QUESTIONS",
+  RESTART_QUIZ: "RESTART_QUIZ",
 };
 
 const reducer = (state, { type, payload }) => {
@@ -30,16 +31,23 @@ const reducer = (state, { type, payload }) => {
       return { ...state, currQuestionIdx: state.currQuestionIdx + 1 };
 
     case ACTIONS.SET_NEXT_STEP:
-        return {...state, step: state.step + 1};
-    
+      return { ...state, step: state.step + 1 };
+
     case ACTIONS.SET_DIFFICULTY_LEVEL:
-        return {...state, difficulty: payload};
+      return { ...state, difficulty: payload };
 
     case ACTIONS.SET_CATEGORIES:
-        return {...state, categories: payload};
+      return { ...state, categories: payload };
 
     case ACTIONS.SET_TOTAL_QUESTIONS:
-        return {...state, totalQuestions: payload};
+      return { ...state, totalQuestions: payload };
+
+    case ACTIONS.RESTART_QUIZ:
+      return {
+          ...initialState,
+          step: 1,
+          startQuiz: "yes"
+      };
 
     default:
       return state;
@@ -94,13 +102,17 @@ function Home() {
     if (state.currQuestionIdx === state.totalQuestions && state.step === 4) {
       return (
         <>
-          <Result score={state.score} totalQuestions={state.totalQuestions} />
+          <Result dispatch={dispatch} ACTIONS={ACTIONS} score={state.score} totalQuestions={state.totalQuestions} />
         </>
       );
     } else {
-        return <StyledQuizCard style={{flexDirection: state.step < 4 ? "column" : "row"}}>
-            <Quiz state={state} dispatch={dispatch} ACTIONS={ACTIONS}/>
+      return (
+        <StyledQuizCard
+          style={{ flexDirection: state.step < 4 ? "column" : "row" }}
+        >
+          <Quiz state={state} dispatch={dispatch} ACTIONS={ACTIONS} />
         </StyledQuizCard>
+      );
     }
   } else {
     return (

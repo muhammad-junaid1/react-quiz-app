@@ -8,11 +8,26 @@ const StyledResults = styled.div`
   border-radius: 8px;
   padding: 20px;
   overflowy: scroll;
+  position: relative;
 
   h1 {
     text-align: center;
     text-decoration: underline;
     margin-bottom: 30px;
+  }
+
+  button {
+    background: white;
+    color: black;
+    padding: 14px 18px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 4px;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    font-weight: bold;
+    right: 0;
   }
 
   p {
@@ -26,6 +41,8 @@ const StyledResults = styled.div`
       border-radius: 3px;
       padding: 3px 18px;
       font-weight: bold;
+      width: 50px;
+      text-align: right;
     }
   }
 `;
