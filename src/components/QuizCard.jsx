@@ -66,26 +66,24 @@ const QuizCard = ({
 
   return (
     <>
-        <div className="left">
-          <h1>
-            Question No {currQuestionIdx + 1}
-            <span>/{totalQuestions}</span>
-          </h1>
-          <p>{questionData.question}</p>
-        </div>
-        <div className="right">
-          {questionData.incorrectAnswers.map((choice, idx) => {
-            return (
-              <Choice
-                onClick={() =>
-                  handleClickChoice(choice.toString().toLowerCase())
-                }
-                key={idx}
-                text={choice}
-              />
-            );
-          })}
-        </div>
+      <div className="left">
+        <h1>
+          Question No {currQuestionIdx + 1}
+          <span>/{totalQuestions}</span>
+        </h1>
+        <p>{questionData.question}</p>
+      </div>
+      <div className="right">
+        {questionData.incorrectAnswers.map((choice, idx) => {
+          return (
+            <Choice
+              onClick={() => handleClickChoice(choice.toString().toLowerCase())}
+              key={idx}
+              text={choice}
+            />
+          );
+        })}
+      </div>
     </>
   );
 };
