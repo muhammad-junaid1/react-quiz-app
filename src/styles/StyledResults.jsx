@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledResults = styled.div`
-  background: hotpink;
+  background: #ff00e0;
   color: white;
   width: 30%;
   height: 60vh;

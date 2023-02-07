@@ -8,7 +8,7 @@ const StyledDifficultyBtns = styled.div`
     width: 100%;
 
     button {
-        background: black;
+        background: #ff00e0;
         color: white;
         padding: 14px 18px;
         font-family: inherit;

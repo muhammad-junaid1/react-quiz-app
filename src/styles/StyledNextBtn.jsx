@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledNextBtn = styled.button`
-    background: darkblue;
+    background: #ff00e0;
     color: white;
     padding: 10px 16px;
     font-family: inherit;
