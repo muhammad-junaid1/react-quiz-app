@@ -10,10 +10,10 @@ const StyledDifficultyBtns = styled.div`
     button {
         background: black;
         color: white;
-        padding: 12px 18px;
+        padding: 14px 18px;
         font-family: inherit;
         border-radius: 4px;
-        width: 30%;
+        width: 32%;
     }
 `;
 

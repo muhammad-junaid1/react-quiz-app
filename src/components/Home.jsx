@@ -11,7 +11,8 @@ const ACTIONS = {
   SET_NEXT_QUESTION: "SET_NEXT_QUESTIONS",
   SET_NEXT_STEP: "SET_NEXT_STEP",
   SET_DIFFICULTY_LEVEL: "SET_DIFFICULTY_LEVEL",
-  SET_CATEGORIES: "SET_CATEGORIES"
+  SET_CATEGORIES: "SET_CATEGORIES",
+  SET_TOTAL_QUESTIONS: "SET_TOTAL_QUESTIONS"
 };
 
 const reducer = (state, { type, payload }) => {
@@ -37,6 +38,9 @@ const reducer = (state, { type, payload }) => {
     case ACTIONS.SET_CATEGORIES:
         return {...state, categories: payload};
 
+    case ACTIONS.SET_TOTAL_QUESTIONS:
+        return {...state, totalQuestions: payload};
+
     default:
       return state;
   }
@@ -46,11 +50,11 @@ const initialState = {
   startQuiz: "",
   currQuestionIdx: 0,
   questions: [],
-  totalQuestions: 5,
+  totalQuestions: 0,
   score: 0,
   step: 1,
   difficulty: "",
-  categories: ""
+  categories: "",
 };
 
 function Home() {

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import data from "../data";
-import StyledQuizCard from "../styles/StyledQuizCard";
 import Choice from "./Choice";
 
 const QuizCard = ({
