@@ -4,7 +4,7 @@ const StyledChoice = styled.div`
     border: 1.5px solid violet;
     border-radius: 4px;
     background: #eee;
-    padding: 10px;
+    padding: 15px 10px;
     margin-bottom: 8px;
     cursor: pointer;
     width: 100%;

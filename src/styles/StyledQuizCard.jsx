@@ -3,7 +3,7 @@ import styled from "styled-components";
 const StyledQuizCard = styled.div`
   background: white;
   width: 65%;
-  padding: 40px 20px;
+  padding: 70px 30px;
   border-radius: 8px;
   display: flex;
   align-items: flex-start;
@@ -11,7 +11,7 @@ const StyledQuizCard = styled.div`
 
   .left {
     width: 50%;
-    padding-right: 10px;
+    padding-right: 20px;
   }
 
   .right {
