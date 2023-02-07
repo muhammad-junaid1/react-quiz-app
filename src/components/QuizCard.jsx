@@ -1,21 +1,18 @@
+import { useEffect, useState } from "react";
+import data from "../data";
 import StyledQuizCard from "../styles/StyledQuizCard";
 import Choice from "./Choice";
 
 const QuizCard = ({
-  currQuestionIdx,
-  totalQuestions,
-  questionData,
+  stateObj: { currQuestionIdx, totalQuestions, questions },
   dispatch,
   ACTIONS,
 }) => {
-  const randIdx = Math.floor(
-    Math.random() * questionData.incorrectAnswers.length
-  );
-  questionData.incorrectAnswers.splice(
-    randIdx,
-    null,
-    questionData.correctAnswer
-  );
+  const [questionData, setQuestionData] = useState({
+    incorrectAnswers: [],
+    correctAnswer: "",
+    question: "",
+  });
 
   const handleClickChoice = (selectedChoice) => {
     const correctAnswer = questionData.correctAnswer.toString().toLowerCase();
@@ -28,6 +25,46 @@ const QuizCard = ({
       type: ACTIONS.SET_NEXT_QUESTION,
     });
   };
+
+  useEffect(() => {
+    // const getQuestions = async () => {
+    //   try {
+    //     const response = await fetch(
+    //       "https://the-trivia-api.com/api/questions?limit=5&categories=science&difficulty=easy"
+    //     );
+    //     const data = await response.json();
+    //     dispatch({
+    //       type: ACTIONS.SET_QUESTIONS,
+    //       payload: data,
+    //     });
+    //   } catch (error) {
+    //     console.log("error in getting questions ", error);
+    //   }
+    // };
+    setTimeout(() => {
+      dispatch({
+        type: ACTIONS.SET_QUESTIONS,
+        payload: data,
+      });
+    }, 2000);
+    // getQuestions();
+  }, []);
+
+  useEffect(() => {
+    if (questions.length) {
+      const questionDataObj = questions[currQuestionIdx];
+      const randIdx = Math.floor(
+        Math.random() * questionDataObj.incorrectAnswers.length
+      );
+      questionDataObj.incorrectAnswers.splice(
+        randIdx,
+        null,
+        questionDataObj.correctAnswer
+      );
+      setQuestionData(questionDataObj);
+    }
+  }, [questions, currQuestionIdx]);
+
   return (
     <>
       <StyledQuizCard>
