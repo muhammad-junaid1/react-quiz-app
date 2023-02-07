@@ -1,9 +1,9 @@
 import StyledChoice from "../styles/StyledChoice";
 
-const Choice = ({text, onClick}) => {
+const Choice = ({text, onClick, disabled}) => {
     return (
         <>
-            <StyledChoice onClick={onClick}>
+            <StyledChoice {...(!disabled && {onClick: onClick})}>
                 {text}
             </StyledChoice>
         </>

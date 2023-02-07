@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Choice from "./Choice";
+import "../styles/quiz-card.css";
 
 const QuizCard = ({
   stateObj: {
@@ -17,6 +18,10 @@ const QuizCard = ({
     correctAnswer: "",
     question: "",
   });
+  const [disableChoices, setDisableChoices] = useState(false);
+
+  const questionTextRef = useRef();
+  const choicesRef = useRef();
 
   const handleClickChoice = (selectedChoice) => {
     const correctAnswer = questionData.correctAnswer.toString().toLowerCase();
@@ -61,26 +66,38 @@ const QuizCard = ({
           questionDataObj.correctAnswer
         );
         setQuestionData(questionDataObj);
+        questionTextRef.current.style.animation = "slide .6s ease-in-out forwards";
+        choicesRef.current.style.animation = "fade 1.4s ease-out forwards";
+
+        setDisableChoices(true);
+        setTimeout(() => {
+          questionTextRef.current.style.animation = "";
+        }, 650);
+        setTimeout(() => {
+          choicesRef.current.style.animation = "";
+          setDisableChoices(false);
+        }, 1600);
       }
     }
   }, [questions, currQuestionIdx]);
 
   return (
     <>
-      <div className="left">
+      <div className="left" ref={questionTextRef}>
         <h1>
           Question No {currQuestionIdx + 1}
           <span>/{totalQuestions}</span>
         </h1>
         <p>{questionData.question}</p>
       </div>
-      <div className="right">
+      <div className="right" ref={choicesRef}>
         {questionData.incorrectAnswers.map((choice, idx) => {
           return (
             <Choice
               onClick={() => handleClickChoice(choice.toString().toLowerCase())}
               key={idx}
               text={choice}
+              disabled={disableChoices}
             />
           );
         })}
