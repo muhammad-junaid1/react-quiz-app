@@ -32,9 +32,17 @@ const QuizCard = ({
         type: ACTIONS.INCREASE_SCORE,
       });
     }
-    dispatch({
-      type: ACTIONS.SET_NEXT_QUESTION,
-    });
+    if (currQuestionIdx === totalQuestions - 1) {
+      setTimeout(() => {
+        dispatch({
+          type: ACTIONS.SET_NEXT_QUESTION,
+        });
+      }, 800);
+    } else {
+      dispatch({
+        type: ACTIONS.SET_NEXT_QUESTION,
+      });
+    }
   };
 
   useEffect(() => {
@@ -56,8 +64,8 @@ const QuizCard = ({
   }, []);
 
   const scale = (number, [inMin, inMax], [outMin, outMax]) => {
-    return (number - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
-}
+    return ((number - inMin) / (inMax - inMin)) * (outMax - outMin) + outMin;
+  };
 
   useEffect(() => {
     if (questions.length) {
@@ -72,10 +80,13 @@ const QuizCard = ({
           questionDataObj.correctAnswer
         );
         setQuestionData(questionDataObj);
-        questionTextRef.current.style.animation = "slide .6s ease-in-out forwards";
+        questionTextRef.current.style.animation =
+          "slide .6s ease-in-out forwards";
         choicesRef.current.style.animation = "fade 1.4s ease-out forwards";
 
-        setProgressBarWidth(`${scale(currQuestionIdx, [0, totalQuestions], [0, 100])}%`);
+        setProgressBarWidth(
+          `${scale(currQuestionIdx, [0, totalQuestions], [0, 100])}%`
+        );
 
         setDisableChoices(true);
         setTimeout(() => {
@@ -87,7 +98,7 @@ const QuizCard = ({
         }, 1600);
       }
     }
-  }, [questions, currQuestionIdx]);
+  }, [questions, currQuestionIdx, totalQuestions]);
 
   return (
     <>
@@ -111,7 +122,9 @@ const QuizCard = ({
         })}
       </div>
 
-      <StyledProgress width={progressBarWidth}><div></div></StyledProgress>
+      <StyledProgress width={progressBarWidth}>
+        <div></div>
+      </StyledProgress>
     </>
   );
 };
