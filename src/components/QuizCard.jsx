@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import data from "../data";
 import Choice from "./Choice";
 
 const QuizCard = ({
-  stateObj: { currQuestionIdx, totalQuestions, questions },
+  stateObj: {
+    currQuestionIdx,
+    totalQuestions,
+    questions,
+    difficulty,
+    categories,
+  },
   dispatch,
   ACTIONS,
 }) => {
@@ -26,41 +31,37 @@ const QuizCard = ({
   };
 
   useEffect(() => {
-    // const getQuestions = async () => {
-    //   try {
-    //     const response = await fetch(
-    //       "https://the-trivia-api.com/api/questions?limit=5&categories=science&difficulty=easy"
-    //     );
-    //     const data = await response.json();
-    //     dispatch({
-    //       type: ACTIONS.SET_QUESTIONS,
-    //       payload: data,
-    //     });
-    //   } catch (error) {
-    //     console.log("error in getting questions ", error);
-    //   }
-    // };
-    setTimeout(() => {
-      dispatch({
-        type: ACTIONS.SET_QUESTIONS,
-        payload: data,
-      });
-    }, 2000);
-    // getQuestions();
+    const getQuestions = async () => {
+      try {
+        const response = await fetch(
+          `https://the-trivia-api.com/api/questions?limit=${totalQuestions}&categories=${categories}&difficulty=${difficulty}`
+        );
+        const data = await response.json();
+        dispatch({
+          type: ACTIONS.SET_QUESTIONS,
+          payload: data,
+        });
+      } catch (error) {
+        console.log("error in getting questions ", error);
+      }
+    };
+    getQuestions();
   }, []);
 
   useEffect(() => {
     if (questions.length) {
       const questionDataObj = questions[currQuestionIdx];
-      const randIdx = Math.floor(
-        Math.random() * questionDataObj.incorrectAnswers.length
-      );
-      questionDataObj.incorrectAnswers.splice(
-        randIdx,
-        null,
-        questionDataObj.correctAnswer
-      );
-      setQuestionData(questionDataObj);
+      if (questionDataObj) {
+        const randIdx = Math.floor(
+          Math.random() * questionDataObj.incorrectAnswers.length
+        );
+        questionDataObj.incorrectAnswers.splice(
+          randIdx,
+          null,
+          questionDataObj.correctAnswer
+        );
+        setQuestionData(questionDataObj);
+      }
     }
   }, [questions, currQuestionIdx]);
 

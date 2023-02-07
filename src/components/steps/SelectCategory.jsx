@@ -33,7 +33,7 @@ const SelectCategory = ({dispatch, ACTIONS}) => {
     const handleClickNext = () => {
         dispatch({
             type: ACTIONS.SET_CATEGORIES,
-            payload: selectedCategories.join(".")
+            payload: selectedCategories.join(",").replaceAll("&", "and").replaceAll(" ", "_"),
         });
         dispatch({
             type: ACTIONS.SET_NEXT_STEP
