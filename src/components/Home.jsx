@@ -1,5 +1,6 @@
 import { useReducer } from "react";
-import QuizCard from "./QuizCard";
+import Quiz from "./Quiz";
+import StyledQuizCard from "../styles/StyledQuizCard";
 import StyledQuizHomeScreen from "../styles/StyledQuizHomeScreen";
 import Result from "./Result";
 
@@ -8,6 +9,9 @@ const ACTIONS = {
   SET_QUESTIONS: "SET_QUESTIONS",
   INCREASE_SCORE: "INCREASE_SCORE",
   SET_NEXT_QUESTION: "SET_NEXT_QUESTIONS",
+  SET_NEXT_STEP: "SET_NEXT_STEP",
+  SET_DIFFICULTY_LEVEL: "SET_DIFFICULTY_LEVEL",
+  SET_CATEGORIES: "SET_CATEGORIES"
 };
 
 const reducer = (state, { type, payload }) => {
@@ -24,6 +28,15 @@ const reducer = (state, { type, payload }) => {
     case ACTIONS.SET_NEXT_QUESTION:
       return { ...state, currQuestionIdx: state.currQuestionIdx + 1 };
 
+    case ACTIONS.SET_NEXT_STEP:
+        return {...state, step: state.step + 1};
+    
+    case ACTIONS.SET_DIFFICULTY_LEVEL:
+        return {...state, difficulty: payload};
+
+    case ACTIONS.SET_CATEGORIES:
+        return {...state, categories: payload};
+
     default:
       return state;
   }
@@ -37,6 +50,7 @@ const initialState = {
   score: 0,
   step: 1,
   difficulty: "",
+  categories: ""
 };
 
 function Home() {
@@ -80,9 +94,9 @@ function Home() {
         </>
       );
     } else {
-      return (
-        <QuizCard stateObj={state} dispatch={dispatch} ACTIONS={ACTIONS} />
-      );
+        return <StyledQuizCard style={{flexDirection: state.step < 4 ? "column" : "row"}}>
+            <Quiz state={state} dispatch={dispatch} ACTIONS={ACTIONS}/>
+        </StyledQuizCard>
     }
   } else {
     return (

@@ -67,7 +67,6 @@ const QuizCard = ({
 
   return (
     <>
-      <StyledQuizCard>
         <div className="left">
           <h1>
             Question No {currQuestionIdx + 1}
@@ -88,7 +87,6 @@ const QuizCard = ({
             );
           })}
         </div>
-      </StyledQuizCard>
     </>
   );
 };
