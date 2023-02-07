@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Choice from "./Choice";
 import "../styles/quiz-card.css";
+import StyledProgress from "../styles/StyledProgress";
 
 const QuizCard = ({
   stateObj: {
@@ -19,6 +20,7 @@ const QuizCard = ({
     question: "",
   });
   const [disableChoices, setDisableChoices] = useState(false);
+  const [progressBarWidth, setProgressBarWidth] = useState("0%");
 
   const questionTextRef = useRef();
   const choicesRef = useRef();
@@ -53,6 +55,10 @@ const QuizCard = ({
     getQuestions();
   }, []);
 
+  const scale = (number, [inMin, inMax], [outMin, outMax]) => {
+    return (number - inMin) / (inMax - inMin) * (outMax - outMin) + outMin;
+}
+
   useEffect(() => {
     if (questions.length) {
       const questionDataObj = questions[currQuestionIdx];
@@ -68,6 +74,8 @@ const QuizCard = ({
         setQuestionData(questionDataObj);
         questionTextRef.current.style.animation = "slide .6s ease-in-out forwards";
         choicesRef.current.style.animation = "fade 1.4s ease-out forwards";
+
+        setProgressBarWidth(`${scale(currQuestionIdx, [0, totalQuestions], [0, 100])}%`);
 
         setDisableChoices(true);
         setTimeout(() => {
@@ -102,6 +110,8 @@ const QuizCard = ({
           );
         })}
       </div>
+
+      <StyledProgress width={progressBarWidth}><div></div></StyledProgress>
     </>
   );
 };

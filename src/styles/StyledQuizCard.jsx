@@ -8,6 +8,7 @@ const StyledQuizCard = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  position: relative;
 
   .left {
     width: 50%;
