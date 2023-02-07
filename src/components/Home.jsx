@@ -50,7 +50,7 @@ const initialState = {
   startQuiz: "",
   currQuestionIdx: 0,
   questions: [],
-  totalQuestions: 0,
+  totalQuestions: null,
   score: 0,
   step: 1,
   difficulty: "",
@@ -91,7 +91,7 @@ function Home() {
       </StyledQuizHomeScreen>
     );
   } else if (state.startQuiz === "yes") {
-    if (state.currQuestionIdx === state.totalQuestions) {
+    if (state.currQuestionIdx === state.totalQuestions && state.step === 4) {
       return (
         <>
           <Result score={state.score} totalQuestions={state.totalQuestions} />
