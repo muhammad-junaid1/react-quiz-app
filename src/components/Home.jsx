@@ -81,7 +81,6 @@ function Home() {
       payload: "yes",
     });
   };
-
   if (!state.startQuiz) {
     return (
       <StyledQuizHomeScreen>
