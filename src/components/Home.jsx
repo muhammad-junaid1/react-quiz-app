@@ -99,7 +99,7 @@ function Home() {
       </StyledQuizHomeScreen>
     );
   } else if (state.startQuiz === "yes") {
-    if (state.currQuestionIdx === state.totalQuestions && state.step === 4) {
+    if (state.currQuestionIdx >= state.totalQuestions && state.step === 4) {
         return (
           <>
             <Result dispatch={dispatch} ACTIONS={ACTIONS} score={state.score} totalQuestions={state.totalQuestions} />
