@@ -6,6 +6,9 @@ const StyledQuizHomeScreen = styled.div`
     font-size: 60px;
     color: white;
     font-weight: bold;
+    @media all and (max-width: 768px) {
+      font-size: 40px;
+    }
   }
 
   button {

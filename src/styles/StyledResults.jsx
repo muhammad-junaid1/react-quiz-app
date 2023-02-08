@@ -10,6 +10,10 @@ const StyledResults = styled.div`
   overflowy: scroll;
   position: relative;
 
+  @media all and (max-width: 768px) {
+    width: 80%;
+  }
+
   h1 {
     text-align: center;
     text-decoration: underline;

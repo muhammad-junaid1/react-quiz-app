@@ -9,14 +9,27 @@ const StyledQuizCard = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   position: relative;
+    @media all and (max-width: 768px) {
+      flex-direction: column !important;
+    }
 
   .left {
     width: 50%;
     padding-right: 20px;
+
+    @media all and (max-width: 768px) {
+      padding-right: 0px;
+      width: 100%;
+    }
   }
 
   .right {
     width: 50%;
+
+    @media all and (max-width: 768px) {
+      width: 100%;
+      margin-top: 25px;
+    }
   }
 
   h1 {
