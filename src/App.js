@@ -5,7 +5,7 @@ import QuizStateProvider from "./contexts/QuizStateProvider";
 const App = () => {
   return <QuizStateProvider>
     <StyledContainer>
-        <Home/>
+          <Home/>
     </StyledContainer>
   </QuizStateProvider>;
 }
