@@ -84,7 +84,7 @@ const QuizCard = () => {
         setQuestionData(questionDataObj);
         questionTextRef.current.style.animation =
           "slide .6s ease-in-out forwards";
-        choicesRef.current.style.animation = "fade 1.4s ease-out forwards";
+        choicesRef.current.style.animation = "fade 1s ease-out forwards";
 
         setProgressBarWidth(
           `${scale(currQuestionIdx, [0, totalQuestions], [0, 100])}%`
@@ -97,7 +97,7 @@ const QuizCard = () => {
         setTimeout(() => {
           choicesRef.current.style.animation = "";
           setDisableChoices(false);
-        }, 1600);
+        }, 1200);
       }
     }
   }, [questions, currQuestionIdx, totalQuestions]);
