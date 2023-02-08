@@ -1,19 +1,21 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import Choice from "./Choice";
 import "../styles/quiz-card.css";
 import StyledProgress from "../styles/StyledProgress";
+import { QuizStateContext } from "../contexts/QuizStateProvider";
 
-const QuizCard = ({
-  stateObj: {
-    currQuestionIdx,
-    totalQuestions,
-    questions,
-    difficulty,
-    categories,
-  },
-  dispatch,
-  ACTIONS,
-}) => {
+const QuizCard = () => {
+  const {
+    state: {
+      currQuestionIdx,
+      totalQuestions,
+      questions,
+      difficulty,
+      categories,
+    },
+    dispatch,
+    ACTIONS,
+  } = useContext(QuizStateContext);
   const [questionData, setQuestionData] = useState({
     incorrectAnswers: [],
     correctAnswer: "",
